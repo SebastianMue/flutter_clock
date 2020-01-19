@@ -4,6 +4,8 @@
 
 import 'dart:async';
 
+import 'package:digital_clock/models/ClockTheme.dart';
+import 'package:digital_clock/models/TextLine.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ final _darkTheme = {
   _Element.text: Colors.white,
   _Element.shadow: Color(0xFF174EA6),
 };
+
+ClockTheme theme = new ClockTheme(Colors.blueGrey, Colors.white, Colors.black38);
 
 /// A basic digital clock.
 ///
@@ -112,21 +116,10 @@ class _DigitalClockState extends State<DigitalClock> {
       ],
     );
     return Container(
-        color: Colors.black87,
+        color: Colors.blueGrey,
         child: Center(
           child: Column(children: <Widget>[
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                children: [
-                  TextSpan(text: 'JK'),
-                  TextSpan(text: 'IT', style: TextStyle(color: Colors.white)),
-                  TextSpan(text: 'JKLO'),
-                  TextSpan(text: 'IS', style: TextStyle(color: Colors.white)),
-                  TextSpan(text: 'JKLOJKLOJ'),
-                ],
-              ),
-            ),
+            new TextLine("JKJKLOSKFIVEJKLKIKJD",0).getRichTextWidget(theme, [true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,true]),
             RichText(
               text: TextSpan(
                 style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
