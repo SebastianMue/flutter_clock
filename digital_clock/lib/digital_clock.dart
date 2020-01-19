@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:digital_clock/models/ClockTheme.dart';
 import 'package:digital_clock/models/TextLine.dart';
+import 'package:digital_clock/models/languagekits/EnglishKit.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ final _darkTheme = {
   _Element.shadow: Color(0xFF174EA6),
 };
 
-ClockTheme theme = new ClockTheme(Colors.blueGrey, Colors.white, Colors.black38);
+ClockTheme theme =
+    new ClockTheme(Colors.blueGrey, Colors.white, Colors.black38);
 
 /// A basic digital clock.
 ///
@@ -118,60 +120,7 @@ class _DigitalClockState extends State<DigitalClock> {
     return Container(
         color: Colors.blueGrey,
         child: Center(
-          child: Column(children: <Widget>[
-            new TextLine("JKJKLOSKFIVEJKLKIKJD",0).getRichTextWidget(theme, [true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,true]),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                text: 'LKJKJKJKWJIKWJKWW',
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                children: [
-                  TextSpan(text: 'JK'),
-                  TextSpan(text: 'JKLOSK'),
-                  TextSpan(text: 'FIVE', style: TextStyle(color: Colors.white)),
-                  TextSpan(text: 'JKLKIKJ'),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                text: 'JKLOJKLOJKLKOSKAKD',
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                children: [
-                  TextSpan(text: 'JPLIK'),
-                  TextSpan(text: 'PAST', style: TextStyle(color: Colors.white)),
-                  TextSpan(text: 'JKLSK'),
-                  TextSpan(text: 'JKIKJ'),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                text: 'JKLOJKLOJKLOJKKAKD',
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
-                children: [
-                  TextSpan(text: 'JK'),
-                  TextSpan(text: 'JKSK'),
-                  TextSpan(text: 'JKLKIKJ'),
-                  TextSpan(text: 'THREE', style: TextStyle(color: Colors.white)),
-                ],
-              ),
-            ),
-          ]),
-        ));
+            child: Column(
+                children: new EnglishKit().getRichTextFields([], theme))));
   }
 }
