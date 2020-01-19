@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,12 +14,6 @@ enum _Element {
   text,
   shadow,
 }
-
-final _lightTheme = {
-  _Element.background: Color(0xFF81B3FE),
-  _Element.text: Colors.white,
-  _Element.shadow: Colors.black,
-};
 
 final _darkTheme = {
   _Element.background: Colors.black,
@@ -95,17 +90,18 @@ class _DigitalClockState extends State<DigitalClock> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).brightness == Brightness.light
-        ? _lightTheme
-        : _darkTheme;
+    final colors = _darkTheme;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
-    final minute = DateFormat('mm').format(_dateTime);
     final fontSize = MediaQuery.of(context).size.width / 3.5;
     final offset = -fontSize / 7;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
-      fontFamily: 'PressStart2P',
+      fontFamily: 'Arial',
       fontSize: fontSize,
       shadows: [
         Shadow(
@@ -115,20 +111,74 @@ class _DigitalClockState extends State<DigitalClock> {
         ),
       ],
     );
-
     return Container(
-      color: colors[_Element.background],
-      child: Center(
-        child: DefaultTextStyle(
-          style: defaultStyle,
-          child: Stack(
-            children: <Widget>[
-              Positioned(left: offset, top: 0, child: Text(hour)),
-              Positioned(right: offset, bottom: offset, child: Text(minute)),
-            ],
-          ),
-        ),
-      ),
-    );
+        color: Colors.black87,
+        child: Center(
+          child: Column(children: <Widget>[
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                children: [
+                  TextSpan(text: 'JK'),
+                  TextSpan(text: 'IT', style: TextStyle(color: Colors.white)),
+                  TextSpan(text: 'JKLO'),
+                  TextSpan(text: 'IS', style: TextStyle(color: Colors.white)),
+                  TextSpan(text: 'JKLOJKLOJ'),
+                ],
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                text: 'LKJKJKJKWJIKWJKWW',
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                children: [
+                  TextSpan(text: 'JK'),
+                  TextSpan(text: 'JKLOSK'),
+                  TextSpan(text: 'FIVE', style: TextStyle(color: Colors.white)),
+                  TextSpan(text: 'JKLKIKJ'),
+                ],
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                text: 'JKLOJKLOJKLKOSKAKD',
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                children: [
+                  TextSpan(text: 'JPLIK'),
+                  TextSpan(text: 'PAST', style: TextStyle(color: Colors.white)),
+                  TextSpan(text: 'JKLSK'),
+                  TextSpan(text: 'JKIKJ'),
+                ],
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                text: 'JKLOJKLOJKLOJKKAKD',
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black38, fontSize: 45, letterSpacing: 8),
+                children: [
+                  TextSpan(text: 'JK'),
+                  TextSpan(text: 'JKSK'),
+                  TextSpan(text: 'JKLKIKJ'),
+                  TextSpan(text: 'THREE', style: TextStyle(color: Colors.white)),
+                ],
+              ),
+            ),
+          ]),
+        ));
   }
 }
