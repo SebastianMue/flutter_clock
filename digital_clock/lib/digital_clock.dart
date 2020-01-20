@@ -70,7 +70,7 @@ class _DigitalClockState extends State<DigitalClock> {
 
   void _updateModel() {
     setState(() {
-      // Cause the clock to rebuild when the model changes.
+      debugPrint("a");
     });
   }
 
@@ -85,6 +85,7 @@ class _DigitalClockState extends State<DigitalClock> {
             Duration(milliseconds: _dateTime.millisecond),
         _updateTime,
       );
+      debugPrint("b");
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       // _timer = Timer(
@@ -117,10 +118,11 @@ class _DigitalClockState extends State<DigitalClock> {
         ),
       ],
     );
+    debugPrint("b");
     return Container(
         color: Colors.blueGrey,
         child: Center(
             child: Column(
-                children: new EnglishKit().getRichTextFields([], theme))));
+                children: new EnglishKit().getRichTextFields(    _dateTime.second%2 == 0 ? ["IT"] : [], theme))));
   }
 }
