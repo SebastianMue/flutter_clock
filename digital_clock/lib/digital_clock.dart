@@ -80,11 +80,9 @@ class _DigitalClockState extends State<DigitalClock> {
       // Update once per minute. If you want to update every second, use the
       // following code.
       _timer = Timer(
-        Duration(minutes: 1) -
-            Duration(seconds: _dateTime.second) -
-            Duration(milliseconds: _dateTime.millisecond),
-        _updateTime,
-      );
+             Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+             _updateTime,
+           );
       debugPrint("b");
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
@@ -123,6 +121,6 @@ class _DigitalClockState extends State<DigitalClock> {
         color: Colors.blueGrey,
         child: Center(
             child: Column(
-                children: new EnglishKit().getRichTextFields(1, 0, theme))));
+                children: new EnglishKit().getRichTextFields(_dateTime.hour, _dateTime.minute, theme))));
   }
 }
