@@ -16,7 +16,7 @@ class TextLine {
       text: TextSpan(
         style:
             TextStyle(color: theme.background, fontSize: 45, letterSpacing: 8),
-        children: Iterable<int>.generate(_text.length-1)
+        children: Iterable<int>.generate(_text.length)
             .map((index) =>
                 getLetterTextSpan(theme, _text[index], activeList[index]))
             .toList(),

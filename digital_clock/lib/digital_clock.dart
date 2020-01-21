@@ -123,6 +123,6 @@ class _DigitalClockState extends State<DigitalClock> {
         color: Colors.blueGrey,
         child: Center(
             child: Column(
-                children: new EnglishKit().getRichTextFields(    _dateTime.second%2 == 0 ? ["IT"] : [], theme))));
+                children: new EnglishKit().getRichTextFields(1, 0, theme))));
   }
 }

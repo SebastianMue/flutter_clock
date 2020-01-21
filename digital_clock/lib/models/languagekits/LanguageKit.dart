@@ -9,12 +9,14 @@ abstract class LanguageKit {
   String _name, _iso;
   List<String> _textLines;
   Map<String, List<Coordinate>> _mapping;
+  Map<int, String> _numberToName;
 
-  LanguageKit(this._iso, this._name, this._textLines, this._mapping);
+  LanguageKit(this._iso, this._name, this._textLines, this._mapping, this._numberToName);
 
-  List<RichText> getRichTextFields(
-      List<String> displayedWords, ClockTheme theme) {
-
+  List<RichText> getRichTextFields(int hour, int minute, ClockTheme theme) {
+    List<String> displayedWords = ["IT", "IS"];
+    debugPrint("nanana");
+    displayedWords.add(_numberToName[hour]);
     List<List<bool>> activeList = List.generate(_textLines.length,
         (_) => List.generate(_textLines[0].length, (_) => false));
 
@@ -24,9 +26,11 @@ abstract class LanguageKit {
     activeCoordinates
         .forEach((coordinate) => activeList[coordinate.y][coordinate.x] = true);
 
-    return Iterable<int>.generate(_textLines.length-1)
+    return Iterable<int>.generate(_textLines.length)
         .map((index) => new TextLine(_textLines[index], index)
             .getRichTextWidget(theme, activeList[index]))
         .toList();
   }
+
+
 }
