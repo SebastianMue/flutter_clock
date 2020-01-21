@@ -1,7 +1,6 @@
-import 'dart:collection';
-
 import 'package:digital_clock/models/Coordinate.dart';
 import 'package:digital_clock/models/languagekits/LanguageKit.dart';
+import 'package:flutter/cupertino.dart';
 
 class EnglishKit extends LanguageKit {
   static String _iso = "en";
@@ -63,6 +62,7 @@ class EnglishKit extends LanguageKit {
       new Coordinate(11, 4)
     ],
     "SIX": [new Coordinate(3, 6), new Coordinate(4, 6), new Coordinate(5, 6)],
+    "MIDNIGHT": [],
     "SEVEN": [
       new Coordinate(14, 5),
       new Coordinate(15, 5),
@@ -112,6 +112,7 @@ class EnglishKit extends LanguageKit {
   };
 
   static Map<int, String> _numberToName = {
+    0: "MIDNIGHT",
     1: "ONE",
     2: "TWO",
     3: "THREE",
@@ -129,23 +130,27 @@ class EnglishKit extends LanguageKit {
   @override
   List<String> getTextFromTime(int hour, int minute) {
     List<String> displayedWords = ["IT", "IS"];
-    minute = (minute/15).round();
+    minute = (minute / 15).round() % 5;
+    debugPrint(minute.toString());
     if (minute == 0) {
       displayedWords.add("O'CLOCK");
     } else if (minute == 1) {
       displayedWords.add("QUARTER");
       displayedWords.add("PAST");
-    }else if (minute == 2) {
+    } else if (minute == 2) {
       displayedWords.add("HALF");
       displayedWords.add("PAST");
-    }else if (minute == 3) {
+    } else if (minute == 3) {
       displayedWords.add("QUARTER");
       displayedWords.add("TO");
-      hour = hour+1;
+      hour = hour + 1;
+    } else if (minute == 4) {
+      displayedWords.add("O'CLOCK");
+      hour = hour + 1;
     }
     displayedWords.add(_numberToName[hour]);
     return displayedWords;
   }
 
-  EnglishKit() : super(_iso, _name, _textLines, _mapping, _numberToName);
+  EnglishKit() : super(_iso, _name, _textLines, _mapping);
 }

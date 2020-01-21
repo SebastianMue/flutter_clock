@@ -24,7 +24,8 @@ class TextLine {
     );
   }
 
-  TextSpan getLetterTextSpan(ClockTheme theme, String character, bool isActive) {
+  TextSpan getLetterTextSpan(ClockTheme theme, String character,
+      bool isActive) {
     return TextSpan(
         text: character,
         style:

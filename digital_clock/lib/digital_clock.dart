@@ -5,31 +5,16 @@
 import 'dart:async';
 
 import 'package:digital_clock/models/ClockTheme.dart';
-import 'package:digital_clock/models/TextLine.dart';
 import 'package:digital_clock/models/languagekits/EnglishKit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_clock_helper/model.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-enum _Element {
-  background,
-  text,
-  shadow,
-}
+ClockTheme _darkTheme =
+new ClockTheme(Colors.black, Colors.white, Color.fromARGB(100, 96, 96, 96));
+ClockTheme _lightTheme =
+new ClockTheme(Colors.white, Colors.black, Color.fromARGB(100, 184,184,184));
 
-final _darkTheme = {
-  _Element.background: Colors.black,
-  _Element.text: Colors.white,
-  _Element.shadow: Color(0xFF174EA6),
-};
-
-ClockTheme theme =
-    new ClockTheme(Colors.blueGrey, Colors.white, Colors.black38);
-
-/// A basic digital clock.
-///
-/// You can do better than this!
 class DigitalClock extends StatefulWidget {
   const DigitalClock(this.model);
 
@@ -69,58 +54,35 @@ class _DigitalClockState extends State<DigitalClock> {
   }
 
   void _updateModel() {
-    setState(() {
-      debugPrint("a");
-    });
+    setState(() {});
   }
 
   void _updateTime() {
     setState(() {
       _dateTime = DateTime.now();
-      // Update once per minute. If you want to update every second, use the
-      // following code.
       _timer = Timer(
-             Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
-             _updateTime,
-           );
-      debugPrint("b");
-      // Update once per second, but make sure to do it at the beginning of each
-      // new second, so that the clock is accurate.
-      // _timer = Timer(
-      //   Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
-      //   _updateTime,
-      // );
+        Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+        _updateTime,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final colors = _darkTheme;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    final hour =
-        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
-    final fontSize = MediaQuery.of(context).size.width / 3.5;
-    final offset = -fontSize / 7;
-    final defaultStyle = TextStyle(
-      color: colors[_Element.text],
-      fontFamily: 'Arial',
-      fontSize: fontSize,
-      shadows: [
-        Shadow(
-          blurRadius: 0,
-          color: colors[_Element.shadow],
-          offset: Offset(10, 0),
-        ),
-      ],
-    );
-    debugPrint("b");
+    final theme = Theme
+        .of(context)
+        .brightness == Brightness.light
+        ? _lightTheme
+        : _darkTheme;
     return Container(
-        color: Colors.blueGrey,
+        color: theme.background,
         child: Center(
             child: Column(
-                children: new EnglishKit().getRichTextFields(_dateTime.hour, _dateTime.minute, theme))));
+                children: new EnglishKit().getRichTextFields(
+                    _dateTime.hour, _dateTime.minute, theme))));
   }
 }

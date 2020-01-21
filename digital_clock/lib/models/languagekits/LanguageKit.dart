@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:digital_clock/models/ClockTheme.dart';
 import 'package:digital_clock/models/Coordinate.dart';
 import 'package:digital_clock/models/TextLine.dart';
@@ -9,9 +7,7 @@ abstract class LanguageKit {
   String _name, _iso;
   List<String> _textLines;
   Map<String, List<Coordinate>> _mapping;
-  Map<int, String> _numberToName;
-
-  LanguageKit(this._iso, this._name, this._textLines, this._mapping, this._numberToName);
+  LanguageKit(this._iso, this._name, this._textLines, this._mapping);
 
   List<RichText> getRichTextFields(int hour, int minute, ClockTheme theme) {
     List<String> displayedWords = getTextFromTime(hour, minute);
@@ -30,8 +26,5 @@ abstract class LanguageKit {
         .toList();
   }
 
-
   List<String> getTextFromTime(int hour, int minute);
-
-
 }
