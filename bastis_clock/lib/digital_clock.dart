@@ -8,7 +8,7 @@ import 'package:digital_clock/models/ClockTheme.dart';
 import 'package:digital_clock/models/languagekits/EnglishKit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:digital_clock/flutter_clock_helper/model.dart';
+import 'package:flutter_clock_helper/model.dart';
 
 ClockTheme _darkTheme =
 new ClockTheme(Colors.black, Colors.white, Color.fromARGB(100, 96, 96, 96));
