@@ -11,6 +11,7 @@ abstract class LanguageKit {
 
   List<RichText> getRichTextFields(int hour, int minute, ClockTheme theme) {
     List<String> displayedWords = getTextFromTime(hour, minute);
+
     List<List<bool>> activeList = List.generate(_textLines.length,
         (_) => List.generate(_textLines[0].length, (_) => false));
 

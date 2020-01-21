@@ -3,6 +3,15 @@ import 'package:digital_clock/models/languagekits/LanguageKit.dart';
 import 'package:flutter/cupertino.dart';
 
 class EnglishKit extends LanguageKit {
+
+  static final oClock = "O'CLOCK";
+  static final to = "TO";
+  static final quarter = "QUARTER";
+  static final past = "PAST";
+  static final half = "HALF";
+  static final it = "IT";
+  static final isConstant = "IS";
+
   static String _iso = "en";
   static String _name = "English";
   static List<String> _textLines = [
@@ -15,7 +24,7 @@ class EnglishKit extends LanguageKit {
     "TWOSIXTENIJIO'CLOCK"
   ];
   static Map<String, List<Coordinate>> _mapping = {
-    "QUARTER": [
+    quarter: [
       new Coordinate(9, 1),
       new Coordinate(10, 1),
       new Coordinate(11, 1),
@@ -24,22 +33,21 @@ class EnglishKit extends LanguageKit {
       new Coordinate(14, 1),
       new Coordinate(15, 1),
     ],
-    "TO": [new Coordinate(4, 2), new Coordinate(5, 2)],
-    "PAST": [
+    to: [new Coordinate(4, 2), new Coordinate(5, 2)],
+    past: [
       new Coordinate(11, 2),
       new Coordinate(12, 2),
       new Coordinate(13, 2),
       new Coordinate(14, 2)
     ],
-    "HALF": [
+    half: [
       new Coordinate(0, 1),
       new Coordinate(1, 1),
       new Coordinate(2, 1),
       new Coordinate(3, 1)
     ],
-    "IS": [new Coordinate(10, 0), new Coordinate(11, 0)],
-    "IS": [new Coordinate(10, 0), new Coordinate(11, 0)],
-    "IT": [new Coordinate(5, 0), new Coordinate(6, 0)],
+    isConstant: [new Coordinate(10, 0), new Coordinate(11, 0)],
+    it: [new Coordinate(5, 0), new Coordinate(6, 0)],
     "ONE": [new Coordinate(1, 4), new Coordinate(2, 4), new Coordinate(3, 4)],
     "TWO": [new Coordinate(0, 6), new Coordinate(1, 6), new Coordinate(2, 6)],
     "THREE": [
@@ -100,7 +108,7 @@ class EnglishKit extends LanguageKit {
       new Coordinate(17, 3),
       new Coordinate(18, 3)
     ],
-    "O'CLOCK": [
+    oClock: [
       new Coordinate(12, 6),
       new Coordinate(13, 6),
       new Coordinate(14, 6),
@@ -129,23 +137,22 @@ class EnglishKit extends LanguageKit {
 
   @override
   List<String> getTextFromTime(int hour, int minute) {
-    List<String> displayedWords = ["IT", "IS"];
+    List<String> displayedWords = [it, isConstant];
     minute = (minute / 15).round() % 5;
-    debugPrint(minute.toString());
     if (minute == 0) {
-      displayedWords.add("O'CLOCK");
+      displayedWords.add(oClock);
     } else if (minute == 1) {
-      displayedWords.add("QUARTER");
-      displayedWords.add("PAST");
+      displayedWords.add(quarter);
+      displayedWords.add(past);
     } else if (minute == 2) {
-      displayedWords.add("HALF");
-      displayedWords.add("PAST");
+      displayedWords.add(half);
+      displayedWords.add(past);
     } else if (minute == 3) {
-      displayedWords.add("QUARTER");
-      displayedWords.add("TO");
+      displayedWords.add(quarter);
+      displayedWords.add(to);
       hour = hour + 1;
     } else if (minute == 4) {
-      displayedWords.add("O'CLOCK");
+      displayedWords.add(oClock);
       hour = hour + 1;
     }
     displayedWords.add(_numberToName[hour]);
