@@ -83,6 +83,6 @@ class _DigitalClockState extends State<DigitalClock> {
         child: Center(
             child: Column(
                 children: new EnglishKit().getRichTextFields(
-                    _dateTime.hour, _dateTime.minute, theme))));
+                    _dateTime.hour%12, _dateTime.minute, theme))));
   }
 }
